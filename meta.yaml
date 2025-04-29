@@ -1,0 +1,43 @@
+{% set name = "metcalcs" %}
+{% set version = "0.1.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://github.com/inkenbrandt/metcalcs/archive/{{ version }}.tar.gz
+  sha256: 29e076fd48e09e3ae638a2166c09e853f0ba4325f34b5da5d2a95f706d089b8f
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.8
+    - setuptools >=61.0
+    - wheel
+    - pip
+  run:
+    - python >=3.8
+    - numpy
+    - pandas
+
+test:
+  imports:
+    - metcalcs
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  summary: meteorological package to check output from weather stations
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - paul
