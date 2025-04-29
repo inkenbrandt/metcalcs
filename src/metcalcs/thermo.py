@@ -227,7 +227,6 @@ def _saturation_vapor_pressure_ice(temp: np.ndarray) -> np.ndarray:
     )
 
 
-
 def aerodynamic_resistance(
     z: float, z0: float, d: float, u: Union[float, np.ndarray]
 ) -> Union[float, np.ndarray]:
@@ -285,7 +284,8 @@ def aerodynamic_resistance(
             raise ValueError("Measurement height must be greater than d + z0")
         validate_inputs(u=u)
 
-    return (np.log((z - d) / z0)) ** 2 / (k ** 2 * u)
+    return (np.log((z - d) / z0)) ** 2 / (k**2 * u)
+
 
 def h_tvardry(
     rho: Union[float, np.ndarray],
@@ -347,7 +347,7 @@ def h_tvardry(
     where
 
     * :math:`\\kappa \\approx 0.41` (von Kármán constant),
-    * :math:`g \\approx 9.81\\,\\text{m s⁻²}` (gravitational acceleration),
+    * :math:`g \\approx 9.81\\text{m s⁻²}` (gravitational acceleration),
     * :math:`C_1 = 2.9` and :math:`C_2 = 28.4` are empirical constants
       calibrated by De Bruin et al. (1992).
 
@@ -379,6 +379,7 @@ def h_tvardry(
     )
 
     return H
+
 
 def psychrometric_constant(
     airtemp: Union[float, np.ndarray],
@@ -436,9 +437,8 @@ def psychrometric_constant(
 
     return gamma
 
-def latent_heat(
-    airtemp: Union[float, np.ndarray]
-) -> Union[float, np.ndarray]:
+
+def latent_heat(airtemp: Union[float, np.ndarray]) -> Union[float, np.ndarray]:
     """
     Calculate the latent heat of vaporization of water as a function of air temperature.
 
@@ -477,6 +477,7 @@ def latent_heat(
     L = 4185.5 * (751.78 - 0.5655 * (airtemp + 273.15))
 
     return L
+
 
 def potential_temperature(
     airtemp: Union[float, np.ndarray],
@@ -539,6 +540,7 @@ def potential_temperature(
 
     # Convert back to Celsius
     return theta - 273.15
+
 
 def air_density(
     airtemp: Union[float, np.ndarray],
