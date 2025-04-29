@@ -1,5 +1,6 @@
 sphinx
 sphinx-rtd-theme
+numpy
 myst-parser
 numpydoc
 sphinxcontrib-apidoc
