@@ -1,43 +1,31 @@
-{% set name = "metcalcs" %}
-{% set version = "0.1.0" %}
+name: metcalcs-dev               # the name is ignored when CI runs `conda env update -n base`
+channels:
+  - conda-forge                  # single channel keeps things deterministic
+dependencies:
+  # ---- runtime ----
+  - python >=3.9,<3.13           # same range supported in pyproject
+  - numpy
+  - pandas
 
-package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  # ---- documentation ----
+  - sphinx
+  - sphinx_rtd_theme
 
-source:
-  url: https://github.com/inkenbrandt/metcalcs/archive/{{ version }}.tar.gz
-  sha256: 29e076fd48e09e3ae638a2166c09e853f0ba4325f34b5da5d2a95f706d089b8f
+  # ---- testing / QA ----
+  - pytest
+  - coverage
+  - mypy
+  - ruff
+  - black
 
-build:
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  # ---- packaging / release helpers ----
+  - bump2version
+  - twine
+  - wheel
+  - tox
+  - watchdog                    # file-watching helper used in dev workflow
 
-requirements:
-  host:
-    - python >=3.8
-    - setuptools >=61.0
-    - wheel
-    - pip
-  run:
-    - python >=3.8
-    - numpy
-    - pandas
-
-test:
-  imports:
-    - metcalcs
-  commands:
-    - pip check
-  requires:
-    - pip
-
-about:
-  summary: meteorological package to check output from weather stations
-  license: MIT
-  license_file: LICENSE
-
-extra:
-  recipe-maintainers:
-    - paul
+  # ---- pip section ----
+  - pip
+  - pip:
+      - -e .                    # install metcalcs from the local checkout in editable mode
