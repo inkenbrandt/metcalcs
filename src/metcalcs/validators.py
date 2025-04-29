@@ -1,3 +1,7 @@
+import numpy as np
+import warnings
+
+
 def validate_inputs(**kwargs) -> None:
     """Validate input parameters"""
     for name, value in kwargs.items():
@@ -5,7 +9,7 @@ def validate_inputs(**kwargs) -> None:
             if not all(np.isfinite(x) for x in np.asarray(value).flatten()):
                 raise (f"Invalid {name}: contains non-finite values")
         elif not np.isfinite(value):
-            raise MeteoError(f"Invalid {name}: {value} is not finite")
+            raise warnings.warn(f"Invalid {name}: {value} is not finite")
 
 
 def to_array(*args):
