@@ -21,7 +21,7 @@ deploy:
   distributions: sdist bdist_wheel
   user: inkenbrandt
   password:
-    secure: PLEASE_REPLACE_ME
+    secure: n#Xi!QgfA#94wXC
   on:
     tags: true
     repo: inkenbrandt/metcalcs
